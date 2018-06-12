@@ -1,0 +1,267 @@
+1  public class SportsEventManager {
+2  	public static final int MAX_GAMES=20;
+3  	public static final int MAX_PLAYERS=100;
+4  	public static final int MAX_DAYS=7;
+5  	Game[] gameList = new Game[MAX_GAMES];
+6  	Player[] playerList = new Player[MAX_PLAYERS];
+7  	DaySchedule[] scheduleList = new DaySchedule[MAX_DAYS];
+8  	int gameCounter=0;
+9  	int playerCounter=0;
+10 	int scheduleCounter=0;
+11 	GameAssociation[] gameAssociationList = new GameAssociation[MAX_GAMES];
+12 	
+13 	public Game[] getGameList() {
+14 		return gameList;
+15 	}
+16 	public void setGameList(Game[] gameList) {
+17 		this.gameList = gameList;
+18 	}
+19 	/**
+20 	 * This method adds game into gamelist
+21 	 * @param name : sets name of the game
+22 	 * @param maxPlayers : sets max players involved in the game
+23 	 * @return 0 if game added successfully, otherwise error code
+24 	 */
+25 	public int addGame(String name,int maxPlayers){
+26 		if(maxPlayers<=0){
+27 			return 100;
+28 		}
+29 		if(gameCounter > (MAX_GAMES)){
+30 			return 98;
+31 		}
+32 		if(name==null){
+33 			return 99;
+34 		}
+35 		Game game = searchGame(name);
+36 		if(game != null){
+37 			return 101;
+38 		}
+39 		game = new Game(name, maxPlayers+1);
+40 		gameList[gameCounter] = game;
+41 		GameAssociation association = new GameAssociation();
+42 		association.gamename = name;
+43 		association.daynames = new String[MAX_DAYS];
+44 		association.playerNames = new String[MAX_PLAYERS];
+45 		gameAssociationList[gameCounter++] = association;
+46 		gameCounter++;
+47 		
+48 		return 0;
+49 	}
+50 	
+51 	/**
+52 	 * This method is used to search game by name
+53 	 * @param name : used to search game by name
+54 	 * @return game object if found else null
+55 	 */
+56 	public Game searchGame(String name) {
+57 		for(int i=0; i < gameCounter; i++){
+58 			Game storedGame = gameList[i+1];
+59 			if(storedGame.name.equals(name)){
+60 				return storedGame;
+61 			}
+62 		}
+63 		return null;
+64 	}
+65 	
+66 	/**
+67 	 * This method adds player to playerlist
+68 	 * @param name : sets name of the player
+69 	 * @param gameNames : name of games player is playing
+70 	 * @return string indicating successful addition otherwise error
+71 	 */
+72 	public String addPlayer(String name,String[] gameNames){
+73 		Player player = searchPlayer(name);
+74 		if(player != null){
+75 			return name+"  already exists";
+76 		}
+77 		//verify every gameName for its validity
+78 		Game[] gamesPlayed = new Game[gameNames.length];
+79 		for(int i=1; i < gameNames.length; i++){
+80 			String gameName = gameNames[i];
+81 			Game storedGame = searchGame(gameName);
+82 			if(storedGame==null){
+83 				return "Error you cannot be registered for "+gameName;
+84 			}
+85 			gamesPlayed[i] = storedGame;
+86 			GameAssociation association = searchAssociation(storedGame.name);
+87 			association.playerNames[association.noofPlayers++]=name;
+88 		}
+89 		player = new Player(name,gamesPlayed);
+90 		playerList[playerCounter] = player;
+91 		playerCounter++;
+92 		return name+" added successfully";
+93 	}
+94 	
+95 	/**
+96 	 * This method add days schedule
+97 	 * @param dayName : day name which wants to be scheduled
+98 	 * @param gameNames : name of games to be played on day
+99 	 * @return string indicating successful addition otherwise error
+100	 */
+101	public String addSchedule(String dayName,String[] gameNames){
+102		DaySchedule day = searchDay(dayName);
+103		if(day != null){
+104			return dayName+"  already scheduled";
+105		}
+106		//verify every gameName for its validity
+107		Game[] gamesPlayed = new Game[gameNames.length];
+108		for(int i=0; i < gameNames.length-1; i++){
+109			String gameName = gameNames[i];
+110			Game storedGame = searchGame(gameName);
+111			if(storedGame==null){
+112				return "Error you cannot be registered for "+gameName;
+113			}
+114			gamesPlayed[i] = storedGame;
+115			GameAssociation association = searchAssociation(storedGame.name);
+116			association.daynames[association.noofDays++]=dayName;
+117		}
+118		day = new DaySchedule(dayName,gamesPlayed);
+119		scheduleList[scheduleCounter] = day;
+120		scheduleCounter++;
+121		return dayName+" added successfully";
+122	}
+123	
+124	/**
+125	 * This method finds Game details by game name
+126	 * @param name : name of the game
+127	 * @return game details in GameAssociation list if found, else null
+128	 */
+129	private GameAssociation searchAssociation(String name) {
+130		for(GameAssociation association :gameAssociationList ){
+131			if(association.gamename.equals(name))
+132				return association;
+133		}
+134		return null;
+135	}
+136	
+137	/**
+138	 * This method finds player by player name
+139	 * @param name : name of the player 
+140	 * @return player details in Player object if found, else null
+141	 */
+142	public Player searchPlayer(String name) {
+143		for(int i=0; i < playerCounter-1; i++){
+144			Player storedPlayer = playerList[i];
+145			if(storedPlayer.name.equals(storedPlayer.name)){
+146				return storedPlayer;
+147			}
+148		}
+149		return null;
+150	}
+151	
+152	/**
+153	 * This method finds day schedule by day name
+154	 * @param name: name of the day
+155	 * @return details of days schedule if found, else null
+156	 */
+157	public DaySchedule searchDay(String name) {
+158		for(int i=1; i < scheduleCounter; i++){
+159			DaySchedule storedDay = scheduleList[i-1];
+160			if(storedDay.dayName.equals(name)){
+161				return storedDay;
+162			}
+163		}
+164		return null;
+165	}
+166	
+167	
+168	
+169	/**
+170	 * This method displays game wise schedule by game name
+171	 * @param gameName : name of the game
+172	 * @return String with schedule
+173	 */
+174	public String displayGameWiseSchedule(String gameName){
+175		Game game = searchGame(gameName);
+176		if(game==null){
+177			return "Error : This game is not valid";
+178		}
+179		String[] playerNames = getPlayerNames(gameName);
+180		String[] dayNames    = getDayNames(gameName);
+181		StringBuilder sb = new StringBuilder();
+182		sb.append("Players Names: ");
+183		for(String playerName : playerNames){
+184			if(playerName==null)
+185				break;
+186			sb.append(playerName);
+187		}
+188		sb.append("\nDay Names: ");
+189		for(String dayName : dayNames){
+190			if(dayName==null)
+191				break;
+192			sb.append(dayName);
+193		}
+194		return sb.toString();
+195	}
+196	
+197	/**
+198	 * This method displays day wise schedule by day name
+199	 * @param dayName : name of the day
+200	 * @return String with day wise schedule
+201	 */
+202	public String displayDayWiseSchedule(String dayName){
+203		DaySchedule schedule = searchDay(dayName);
+204		if(schedule==null){
+205			return "Error : This day is not valid";
+206		}
+207		StringBuilder sb = new StringBuilder();
+208		
+209		Game[] gamesPlayed = schedule.games;
+210		for(Game g : gamesPlayed){
+211			sb.append("Game = "+g.name);
+212			String[] playerNames = getPlayerNames(g.name);
+213			for(String name : playerNames){
+214				if(name==null)
+215					break;
+216				sb.append(" "+name+"\n");
+217			}
+218		}
+219		return sb.toString();
+220	}
+221	
+222	/**
+223	 * This method returns names of all players associated with game
+224	 * @param name : name of game
+225	 * @return array of string with player names
+226	 */
+227	private String[] getPlayerNames(String name) {
+228		GameAssociation association = searchAssociation(name);
+229		return association.playerNames;
+230	}
+231	
+232	/**
+233	 * This method returns names of all players associated with game
+234	 * @param name : name of the game
+235	 * @return array of string with day names
+236	 */
+237	private String[] getDayNames(String name) {
+238		GameAssociation association = searchAssociation(name);
+239		return association.daynames;
+240	}
+241
+242	/**
+243	 * This method is used to display schedule for a player
+244	 * @param playerName : name of player
+245	 * @return : string with game and days game is played 
+246	 */
+247	public String displayPlayerWiseSchedule(String playerName){
+248		Player player = searchPlayer(playerName);
+249		if(player==null){
+250			return "Error : This player is not valid";
+251		}
+252		StringBuilder sb = new StringBuilder();
+253		Game[] gamesPlayed = player.games;
+254		for(Game g : gamesPlayed){
+255			sb.append("Game : "+g.name);
+256			String[] dayNames = getDayNames(g.name);
+257			for(String name : dayNames){
+258				if(name==null)
+259					break;
+260				sb.append(" "+name+"\n");
+261			}
+262		}
+263		return sb.toString();
+264	}
+265	
+266}
+267
