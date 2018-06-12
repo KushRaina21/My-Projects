@@ -1,0 +1,14 @@
+abandon=discard, ditch, dump, fling, jettison, junk, scrap, shed,shuck (off),throw
+backward=shy, bashful, coy, demure, diffident, introverted, modest, recessive, retiring, self-effacing, sheepish, withdrawn
+support= adopt, embrace, espouse; abet, aid, assist, help, prop (up), second, side (with); backstop, bolster, boost, buttress, reinforce (also reenforce); advance, forward, further; plug, preach, talk up; bail out, deliver, rescue, save
+read=browse, dip (into), leaf (through), scan, skim, speed-read, thumb (through), turn over; devour, gobble (up); slog (through), wade (through); reread; proofread; decipher; review, study; apprehend, comprehend, get, grasp, make, make out, perceive, see, tumble (to), understand
+toxic=bane
+jeaulous=envy
+happy= blissful, chuffed [British], delighted, gratified, glad, joyful, joyous, pleased, satisfied, thankful, tickled
+disport=amuse, divert, entertain, regale, solace
+synopsis=abstract, breviary, brief, capsule, conspectus, digest, encapsulation, epitome, inventory, outline, précis, recap, recapitulation, résumé (or resume also resumé), roundup, rundown, run-through, sum, summa, summarization, summing-up, sum-up, summary, wrap-up
+melody=air, lay, song, strain, tune, warble
+inoculate=endue (or indue), imbue, inculcate, ingrain (also engrain), infuse, invest, steep, suffuse
+see=sight
+worry=fear,anxious
+meaning=eloquent, expressive, meaningful, pregnant, revealing, revelatory, significant, suggestive
