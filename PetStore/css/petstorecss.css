@@ -1,0 +1,177 @@
+.column {
+	float: left;
+}
+.left {
+	width: 15%;
+	flex: 15%;
+	background-color: #90C7E3;
+	padding-left: 30px;
+	padding-top: 15px;
+}
+.right {
+	width: 85%;
+	flex: 85%;
+	background-color:#FFFFFF;
+	float:left;
+}
+/*.divstyle {
+	margin-left: 20px;
+
+}*/
+.box1 {
+	padding:0 100px 0 100px;
+}
+
+
+
+/*.reshape1 {
+	max-width:100%;
+	height:auto;
+}
+.resize3 {
+	
+	max-width:100%;
+
+	max-height: 100%;
+}*/
+.reshape {
+	width: 100%;
+	max-height: 200px;
+}
+.row {
+	display: -webkit-flex;
+	display: flex;
+	display: -ms-flex;
+}
+address {
+	font-style:normal;
+}
+body {
+	margin:auto;
+	width: 80%;
+	margin-top: 10px;
+	color:#666666;
+	font-family: "Verdana",Arial,sans-serif;
+	background-color:#FFFFFF;
+	box-shadow: 3px 3px #808080;
+	-webkit-box-shadow: 3px 3px #808080;
+	-webkit-appearance: none;
+	
+}
+h1{
+	line-height: 200%;
+	background-color:#000033;
+	padding-left: 30px;
+	background-image: url("../images/sunset.jpg");
+	background-repeat: no-repeat;
+	background-position: right;
+	color:#FFFFFF;
+	margin: auto;
+}
+footer{
+	font-style: italic;
+	font-size: 0.70em;
+	text-align: center;
+}
+footer a {
+	padding: auto;
+}
+h2 {
+	color: #3399CC;
+	font-family: "Georgia";
+}
+.navclass a {
+	text-decoration: none;
+	color: #1e3e75;
+	font-size: 100%;
+	float: left;
+	font-weight: bold;
+}
+.divstyle {
+	margin-left: 20px;
+	
+}
+.tableclass {
+	
+	
+	border-spacing: 0px;
+
+}
+/*.musicdiv {
+	background-color:#D2B48C;
+	border-bottom: 2px solid black;
+	font-size: .70em;
+	font-weight:bold;
+	padding-left: 50px;
+	height: 100%;
+	margin-left: -50px;
+
+}
+.musicimg {
+	position: relative;
+	margin-top: 10px;
+	margin-left: 150px;
+}*/
+
+/*.divbackground {
+	border-bottom: 1em solid #221811;
+}*/
+.div {
+	margin-bottom: 15px;
+	padding-left: 30px;
+}
+/*.jobform {
+	text-align: right;
+}
+.jobform1 {
+	margin-bottom: 10px;
+}*/
+/*.font {
+	font-size: .8em;
+	padding-left: 10px;
+}
+.scrollabletextbox {
+	overflow:scroll;
+}*/
+@media only screen and (max-width: 767px) {
+	body {
+		width: 100%;
+	}
+	.navclass ,.right,.reshape,.divstyle{
+		font-size: 1.5em;
+		max-width: 100%;
+	}
+}
+@media only screen and (max-width: 479px) {
+	body {
+		width: 100%;
+	}
+	nav,.right,.reshape,.divstyle {
+		font-size: 1.2em;
+		max-width: 100%;
+	}
+	.div {
+		margin-bottom: 15px;
+		padding-left: 1px;
+	}
+	.font {
+		font-size: .8em;
+		padding-left: 1px;
+	}
+	h1 {
+		line-height: 205%;
+		font-size: 1.5em;
+	}
+	.musicimg {
+		position: relative;
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+	.musicdiv {
+		margin-left: -20px;
+	}
+}
+
+
+
+
